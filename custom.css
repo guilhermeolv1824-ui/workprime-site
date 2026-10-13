@@ -1,0 +1,122 @@
+/* custom.css — styles for sections/components added after the original build.
+   Uses the design tokens defined in styles.css (--gold, --border, --surface, ...). */
+
+/* ---- utilities not present in the purged styles.css ---- */
+.leading-snug{line-height:1.375}
+.mb-8{margin-bottom:2rem}
+.pt-6{padding-top:1.5rem}
+.text-right{text-align:right}
+.text-white\/70{color:rgb(255 255 255 / .7)}
+@media (min-width:40rem){
+  .sm\:px-10{padding-inline:2.5rem}
+  .sm\:text-2xl{font-size:1.5rem;line-height:1.333}
+}
+
+/* ---- header nav + mobile menu ---- */
+.site-nav{display:none;align-items:center;gap:2rem;font-size:.875rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em}
+.nav-link{color:var(--muted-foreground);transition:color .15s}
+.nav-link:hover{color:var(--gold)}
+.nav-btn{border:1px solid color-mix(in oklch,var(--gold) 50%,transparent);color:var(--gold);border-radius:2px;padding:.75rem 1.25rem;font-size:.75rem;font-weight:900;transition:background .15s,color .15s}
+.nav-btn:hover{background:var(--gold);color:var(--primary-foreground)}
+.nav-toggle{display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:0 10px;background:none;border:1px solid var(--border);border-radius:2px;cursor:pointer}
+.nav-toggle span{display:block;height:2px;background:var(--gold)}
+.site-nav.is-open{display:flex;flex-direction:column;align-items:stretch;gap:1rem;position:absolute;top:5rem;left:0;right:0;padding:1.5rem 1.25rem;background:var(--background);border-bottom:1px solid var(--border);text-align:center}
+.site-nav.is-open .nav-btn,.site-nav.is-open a:last-child{padding:.9rem 1.25rem}
+@media (min-width:48rem){
+  .site-nav{display:flex}
+  .nav-toggle{display:none}
+}
+@media (min-width:48rem) and (max-width:70rem){
+  .site-nav{gap:1rem;font-size:.75rem}
+  .site-nav a:last-child{padding:.75rem .9rem}
+}
+html{scroll-behavior:smooth}
+section[id],div[id="work"]{scroll-margin-top:5rem}
+
+/* ---- hero ---- */
+.hero-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}
+@media (min-width:40rem){.hero-stats{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.hero-trust{max-width:60ch}
+
+/* ---- gallery / carousel ---- */
+.carousel-track{transition:transform .45s cubic-bezier(.4,0,.2,1)}
+.gallery-open{cursor:zoom-in;background:none;border:0;padding:0;text-align:left}
+.carousel-btn{display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;border-radius:9999px;border:1px solid color-mix(in oklch,var(--gold) 40%,transparent);background:var(--background);color:var(--gold);cursor:pointer;transition:background .15s,color .15s}
+.carousel-btn:hover:not(:disabled){background:var(--gold);color:var(--primary-foreground)}
+.carousel-btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* ---- lightbox ---- */
+.lightbox{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:rgb(0 0 0 / .92);padding:3.5rem 1rem}
+.lightbox[hidden]{display:none}
+.lb-figure{margin:0;max-width:min(1100px,100%);text-align:center}
+.lb-figure img{max-width:100%;max-height:78vh;object-fit:contain;margin:0 auto;border-radius:2px}
+.lb-figure figcaption{margin-top:1rem;color:rgb(255 255 255 / .85);font-size:.9rem}
+.lb-close,.lb-nav{position:absolute;background:rgb(255 255 255 / .08);color:#fff;border:1px solid rgb(255 255 255 / .2);border-radius:9999px;width:2.75rem;height:2.75rem;font-size:1.75rem;line-height:1;cursor:pointer;transition:background .15s,color .15s}
+.lb-close:hover,.lb-nav:hover{background:var(--gold);color:var(--primary-foreground)}
+.lb-close{top:1rem;right:1rem}
+.lb-nav{top:50%;transform:translateY(-50%)}
+.lb-prev{left:.75rem}
+.lb-next{right:.75rem}
+
+/* ---- testimonial ---- */
+.monogram{display:inline-flex;align-items:center;justify-content:center;width:3rem;height:3rem;border-radius:9999px;background:var(--gradient-gold);color:var(--primary-foreground);font-family:var(--font-display);font-weight:700;letter-spacing:.05em}
+
+/* ---- services filler tile (keeps the 5-card grid even) ---- */
+.filler-tile{display:none}
+@media (min-width:40rem){.filler-tile{display:block}}
+
+/* ---- service area ---- */
+.town-grid{display:flex;flex-wrap:wrap;gap:.75rem;list-style:none;padding:0;margin-left:0}
+.town-chip{display:inline-flex;align-items:center;gap:.6rem;padding:.6rem 1.1rem;border:1px solid var(--border);border-radius:9999px;background:var(--background);font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--foreground);transition:border-color .15s,color .15s,background .15s}
+.town-chip::before{content:"";width:.375rem;height:.375rem;border-radius:9999px;background:var(--gold)}
+.town-chip:hover{border-color:var(--gold);color:var(--gold);background:var(--surface-raised)}
+.area-note{border-top:1px solid var(--border)}
+
+/* ---- how it works ---- */
+.steps-grid{display:grid;gap:1px;list-style:none;padding:0}
+@media (min-width:48rem){.steps-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.step-card{display:block}
+
+/* ---- form helpers ---- */
+.hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* ---- FAQ accordion ---- */
+.faq-list{border-top:1px solid var(--border)}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:1.5rem 0;cursor:pointer;list-style:none;transition:color .15s}
+.faq-q::-webkit-details-marker{display:none}
+.faq-q:hover,.faq-item[open] .faq-q{color:var(--gold)}
+.faq-icon{position:relative;flex:none;width:1rem;height:1rem}
+.faq-icon::before,.faq-icon::after{content:"";position:absolute;left:0;top:50%;width:100%;height:2px;background:var(--gold);transition:transform .2s}
+.faq-icon::after{transform:rotate(90deg)}
+.faq-item[open] .faq-icon::after{transform:rotate(0)}
+.faq-a{padding:0 2.5rem 1.5rem 0;max-width:60ch}
+.normal-case{text-transform:none}
+.tracking-normal{letter-spacing:0}
+
+.text-red-400{color:#f87171}
+#form-status a{text-decoration:underline}
+
+/* ---- phone / tablet polish ---- */
+/* 16px form text stops iOS Safari from zooming in when a field is tapped */
+#estimate-form input,#estimate-form select,#estimate-form textarea{font-size:1rem}
+/* 44px minimum tap targets */
+.tap{display:inline-flex;align-items:center;min-height:44px}
+.carousel-btn{width:2.75rem;height:2.75rem}
+.lb-close,.lb-nav{width:2.75rem;height:2.75rem}
+.faq-q{min-height:44px}
+.nav-link{display:inline-flex;align-items:center;min-height:44px}
+
+/* sticky call button: phones and tablets */
+.call-bar{display:none}
+@media (max-width:63.999rem){
+  .call-bar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;justify-content:center;gap:.6rem;
+    min-height:3.5rem;padding:.5rem 1rem calc(.5rem + env(safe-area-inset-bottom,0px));
+    background:var(--gradient-gold);color:var(--primary-foreground);font-size:.95rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+    box-shadow:0 -4px 18px rgb(0 0 0 / .45)}
+  .call-bar strong{font-family:var(--font-display);font-weight:700;letter-spacing:.04em}
+  body{padding-bottom:calc(3.5rem + env(safe-area-inset-bottom,0px))}
+  html{scroll-padding-bottom:4rem}
+}
+/* lightbox sits above the call bar */
+.lightbox{z-index:100}
