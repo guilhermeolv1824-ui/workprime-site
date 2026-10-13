@@ -120,3 +120,7 @@ section[id],div[id="work"]{scroll-margin-top:5rem}
 }
 /* lightbox sits above the call bar */
 .lightbox{z-index:100}
+
+/* ---- fix: grid children must be allowed to shrink, or the slider track stretches the whole page wider than the phone ---- */
+.grid > *{min-width:0}
+html,body{overflow-x:clip;max-width:100%}
