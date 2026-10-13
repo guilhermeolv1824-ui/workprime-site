@@ -78,7 +78,9 @@
   msg.addEventListener('input', function () { count.textContent = msg.value.length; });
   var form = document.getElementById('estimate-form');
   var status = document.getElementById('form-status');
-  var ENDPOINT = 'https://formsubmit.co/ajax/workprimerp@gmail.com'; // delivers submissions to this inbox
+  // Web3Forms: get a free access key at https://web3forms.com (it is emailed to workprimerp@gmail.com), then paste it below.
+  var ENDPOINT = 'https://api.web3forms.com/submit';
+  var ACCESS_KEY = 'ad1f98b6-f8f6-4e0a-8df9-954540581eec';
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var btn = form.querySelector('button[type="submit"]');
@@ -86,12 +88,12 @@
     if (form.website.value) { status.textContent = 'Thanks! We got your request.'; form.reset(); return; } // spam trap
     var data = {};
     new FormData(form).forEach(function (v, k) { if (k !== 'website') data[k] = v; });
-    data._subject = 'New estimate request: ' + data.project_type + ' in ' + data.project_town;
-    data._template = 'table';
-    data._captcha = 'false';
+    data.access_key = ACCESS_KEY;
+    data.subject = 'New estimate request: ' + data.project_type + ' in ' + data.project_town;
+    data.from_name = 'Work Prime RP website';
     btn.disabled = true; status.textContent = 'Sending…';
     fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) })
-      .then(function (r) { return r.json().then(function (b) { if (!r.ok || b.success === 'false') throw new Error(); }); })
+      .then(function (r) { return r.json().then(function (b) { if (!r.ok || !b.success) throw new Error(); }); })
       .then(function () { status.className = 'mt-4 text-center text-sm text-gold'; status.textContent = "Thanks! We got your request and will reach out soon."; form.reset(); count.textContent = '0'; })
       .catch(function () { status.className = 'mt-4 text-center text-sm text-red-400'; status.innerHTML = 'Something went wrong. Please call <a class="text-gold underline" href="tel:+18562208261">(856) 220-8261</a> or email <a class="text-gold underline" href="mailto:workprimerp@gmail.com">workprimerp@gmail.com</a>.'; })
       .finally(function () { btn.disabled = false; });
